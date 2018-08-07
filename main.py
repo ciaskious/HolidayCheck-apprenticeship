@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 import os
-import random
 import time
 
 
@@ -46,7 +45,7 @@ class MyBoard():
     # Avoid repeated moves
 
     def repeated_cell(self, position):
-        while self.board[position] != " ":
+        while self.board[position-1] != " ":
             position = int(raw_input("\n Take a better look, this cell is taken. Choose a free one  > "))
         return position-1
 
@@ -126,7 +125,7 @@ if __name__ == "__main__":
         refresh_screen()
         x_move = int(raw_input("\nYour turn: Please choose cell 1-9 > "))
 
-        final_move = board.repeated_cell(x_move-1)
+        final_move = board.repeated_cell(x_move)
 
         board.update_cell(final_move, "X")
 
