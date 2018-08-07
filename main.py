@@ -30,6 +30,19 @@ class MyBoard():
         if self.board[position] == " ":
             self.board[position] = player
 
+    # Rules for a smart computer opponent
+
+    def smart_player(self, player):
+        # start from center - if still available
+        if self.board[4] == " ":
+            self.update_cell(4, player)
+        else:
+            # Random move for computer
+            for pos in range(0, 9):
+                if self.board[pos] == " ":
+                    self.update_cell(pos, player)
+                    break
+
     # Get all moves a player has done so that we can find the winner
 
     def get_moves(self, player):
@@ -62,7 +75,7 @@ class MyBoard():
         for pos in self.board:
             if pos != " ":
                 used_moves += 1
-        if used_moves == 8:
+        if used_moves == 9:
             return True
         else:
             return False
@@ -122,15 +135,20 @@ if __name__ == "__main__":
 
         print("\nComputer choosing move... \n")
 
-        o_move = int(random.randrange(9))
+
+        # o_move = int(random.randrange(9))
 
         time.sleep(2)
+        board.smart_player("O")
 
-        board.update_cell(o_move, "O")
+        # board.update_cell(o_move, "O")
+
+        refresh_screen()
 
         # Check if Player O has the winning move
+
         if board.check_win("O"):
-            print("\nHurray! You win <3 \n")
+            print("\nComputer wins... But you can do better! \n")
 
             play_again = raw_input("Would you like to play again? (y/N) > ")
 
