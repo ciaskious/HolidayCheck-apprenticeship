@@ -17,11 +17,11 @@ class MyBoard():
     def print_header(self):
         print """
                      _____                        _____                          _____
-        1 | 2 | 3   |_   _(_) ___    ***   ***   |_   _|_ _  ___    ***   ***   |_   _|__   ___     ***   ***     
-        ----------    | | | |/ __|  ***** *****    | |/ _` |/ __|  ***** *****    | |/ _ \ / _ \   ***** *****       
-        4 | 5 | 6     | | | | (__    *********     | | (_| | (__    *********     | | (_) |  __/    *********     
-        ----------    |_| |_|\___|     *****       |_|\__,_|\___|     *****       |_|\___/ \___|      *****       
-        7 | 8 | 9                        *                              *                               *
+        1 | 2 | 3   |_   _(_) ___    ***   ***   |_   _|_ _  ___    ***   ***   |_   _|__   ___ 
+        ----------    | | | |/ __|  ***** *****    | |/ _` |/ __|  ***** *****    | |/ _ \ / _ \ 
+        4 | 5 | 6     | | | | (__    *********     | | (_| | (__    *********     | | (_) |  __/
+        ----------    |_| |_|\___|     *****       |_|\__,_|\___|     *****       |_|\___/ \___|
+        7 | 8 | 9                        *                              *
         """
 
     def current_display(self):
@@ -43,11 +43,20 @@ class MyBoard():
     def replay(self):
         self.board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
 
+    # Avoid repeated moves
+
+    def repeated_cell(self, position):
+        while self.board[position] != " ":
+            position = int(raw_input("\n Take a better look, this cell is taken. Choose a free one  > "))
+        return position-1
+
     # Puts the new value to the cell. If a move is repeated, the value is not replaced and the player loses his turn.
 
     def update_cell(self, position, player):
         if self.board[position] == " ":
             self.board[position] = player
+
+
 
     # Rules for a smart computer opponent
 
@@ -115,9 +124,11 @@ if __name__ == "__main__":
 
     while True:
         refresh_screen()
-        x_move = int(raw_input("\nX) Please choose cell 1-9 . > "))
+        x_move = int(raw_input("\nYour turn: Please choose cell 1-9 > "))
 
-        board.update_cell(x_move-1, "X")
+        final_move = board.repeated_cell(x_move-1)
+
+        board.update_cell(final_move, "X")
 
         refresh_screen()
 
