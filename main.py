@@ -3,6 +3,7 @@ import os
 import random
 import time
 
+
 class MyBoard():
     os.system('clear')
 
@@ -54,6 +55,18 @@ class MyBoard():
             if win:
                 return player
 
+    # Check if game's a tie
+
+    def draw_game(self):
+        used_moves = 0
+        for pos in self.board:
+            if pos != " ":
+                used_moves += 1
+        if used_moves == 8:
+            return True
+        else:
+            return False
+
 
 if __name__ == "__main__":
     board = MyBoard()
@@ -74,6 +87,7 @@ if __name__ == "__main__":
 
         refresh_screen()
 
+        # Check if Player X has the winning move
         if board.check_win("X"):
             print("\nHurray! You win <3 \n")
 
@@ -88,7 +102,23 @@ if __name__ == "__main__":
             else:
                 break
 
-        # delay computer's next move for 2 sec
+        # Check if a draw occurs after Player X
+
+        if board.draw_game():
+            print("\nNo Losers, no winners!\n")
+
+            play_again = raw_input("Wanna try again? (y/N) > ")
+
+            while play_again not in ("y", "N"):
+                play_again = raw_input("Oops! Didn't get that... Would you like to play again? (y/N) > ")
+
+            if play_again == "y":
+                board.replay()
+                continue
+            else:
+                break
+
+        # Delay computer's next move for 2 sec
 
         print("\nComputer choosing move... \n")
 
@@ -98,3 +128,33 @@ if __name__ == "__main__":
 
         board.update_cell(o_move, "O")
 
+        # Check if Player O has the winning move
+        if board.check_win("O"):
+            print("\nHurray! You win <3 \n")
+
+            play_again = raw_input("Would you like to play again? (y/N) > ")
+
+            while play_again not in ("y", "N"):
+                play_again = raw_input("Oops! Didn't get that... Would you like to play again? (y/N) > ")
+
+            if play_again == "y":
+                board.replay()
+                continue
+            else:
+                break
+
+        # Check if a draw occurs after Player O
+
+        if board.draw_game():
+            print("\nNo Losers, no winners!\n")
+
+            play_again = raw_input("Wanna try again? (y/N) > ")
+
+            while play_again not in ("y", "N"):
+                play_again = raw_input("Oops! Didn't get that... Would you like to play again? (y/N) > ")
+
+            if play_again == "y":
+                board.replay()
+                continue
+            else:
+                break
