@@ -12,12 +12,31 @@ class MyBoard():
     def __init__(self):
         self.board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
 
+    # Game Header
+
+    def print_header(self):
+        print """
+                     _____                        _____                          _____
+        1 | 2 | 3   |_   _(_) ___    ***   ***   |_   _|_ _  ___    ***   ***   |_   _|__   ___     ***   ***     
+        ----------    | | | |/ __|  ***** *****    | |/ _` |/ __|  ***** *****    | |/ _ \ / _ \   ***** *****       
+        4 | 5 | 6     | | | | (__    *********     | | (_| | (__    *********     | | (_) |  __/    *********     
+        ----------    |_| |_|\___|     *****       |_|\__,_|\___|     *****       |_|\___/ \___|      *****       
+        7 | 8 | 9                        *                              *                               *
+        """
+
     def current_display(self):
-        print(" %s   | %s | %s " % (self.board[0], self.board[1], self.board[2]))
-        print("---------------")
-        print(" %s   | %s | %s " % (self.board[3], self.board[4], self.board[5]))
-        print("---------------")
-        print(" %s   | %s | %s " % (self.board[6], self.board[7], self.board[8]))
+        print("     Make your move in cells 1 to 9. You win when you fill 3 cells in row. Good luck! \n")
+        print("                    |    |    ")
+        print("                %s   | %s  | %s " % (self.board[0], self.board[1], self.board[2]))
+        print("                    |    |    ")
+        print("             -------------------")
+        print("                    |    |    ")
+        print("                %s   | %s  | %s " % (self.board[3], self.board[4], self.board[5]))
+        print("                    |    |    ")
+        print("             -------------------")
+        print("                    |    |    ")
+        print("                %s   | %s  | %s " % (self.board[6], self.board[7], self.board[8]))
+        print("                    |    |    ")
 
     # Reset the game
 
@@ -83,10 +102,12 @@ class MyBoard():
 
 if __name__ == "__main__":
     board = MyBoard()
+    board.print_header()
     board.current_display()
 
     def refresh_screen():
         os.system("clear")
+        board.print_header()
 
         board.current_display()
 
@@ -135,13 +156,8 @@ if __name__ == "__main__":
 
         print("\nComputer choosing move... \n")
 
-
-        # o_move = int(random.randrange(9))
-
         time.sleep(2)
         board.smart_player("O")
-
-        # board.update_cell(o_move, "O")
 
         refresh_screen()
 
