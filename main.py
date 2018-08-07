@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import os
 import random
+import time
 
 class MyBoard():
     os.system('clear')
@@ -74,7 +75,7 @@ if __name__ == "__main__":
         refresh_screen()
 
         if board.check_win("X"):
-            print("\n=Hurray! You win <3 \n")
+            print("\nHurray! You win <3 \n")
 
             play_again = raw_input("Would you like to play again? (y/N) > ")
 
@@ -87,7 +88,13 @@ if __name__ == "__main__":
             else:
                 break
 
-        print("Computer choosing move...")
+        # delay computer's next move for 2 sec
+
+        print("\nComputer choosing move... \n")
+
         o_move = int(random.randrange(9))
+
+        time.sleep(2)
+
         board.update_cell(o_move, "O")
 
