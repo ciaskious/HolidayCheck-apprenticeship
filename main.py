@@ -4,8 +4,6 @@ import time
 
 
 class MyBoard():
-    os.system('clear')
-
     # Create board
 
     def __init__(self):
@@ -55,17 +53,11 @@ class MyBoard():
         if self.board[position] == " ":
             self.board[position] = player
 
-
-
-    # Rules for a smart computer opponent
+    # Rule for a "smart" computer opponent
 
     def smart_player(self, player):
-        # start from center - if still available
-        if self.board[4] == " ":
-            self.update_cell(4, player)
-        else:
-            # Random move for computer
-            for pos in range(0, 9):
+        # start from center to the corners to the rest cells
+        for pos in [4, 0, 2, 6, 8, 1, 3, 5, 7]:
                 if self.board[pos] == " ":
                     self.update_cell(pos, player)
                     break
@@ -109,14 +101,12 @@ class MyBoard():
 
 
 if __name__ == "__main__":
+
     board = MyBoard()
-    board.print_header()
-    board.current_display()
 
     def refresh_screen():
         os.system("clear")
         board.print_header()
-
         board.current_display()
 
     # Main game loop
