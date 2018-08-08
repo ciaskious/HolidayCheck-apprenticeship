@@ -123,7 +123,7 @@ if __name__ == "__main__":
 
         # Check if Player X has the winning move
         if board.check_win("X"):
-            print("\nHurray! You win <3 \n")
+            print("\nHurray! Human won <3 \n")
 
             play_again = raw_input("Would you like to play again? (y/N) > ")
 
@@ -164,7 +164,7 @@ if __name__ == "__main__":
         # Check if Player O has the winning move
 
         if board.check_win("O"):
-            print("\nComputer wins... But you can do better! \n")
+            print("\nComputer won... But you can do better! \n")
 
             play_again = raw_input("Would you like to play again? (y/N) > ")
 
